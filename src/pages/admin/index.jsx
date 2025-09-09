@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const API_URL = "https://faustinomantovani-api.onrender.com/api/articles";
+const AUTH_CHECK_URL = "https://faustinomantovani-api.onrender.com/api/auth/check";
 
 export default function AdminPanel() {
   const [articles, setArticles] = useState([]);
@@ -9,13 +10,29 @@ export default function AdminPanel() {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(true); // Loading da checagem
   const router = useRouter();
 
-  // Carregar artigos
+  // Checagem de autenticação ao montar o componente
   useEffect(() => {
-    fetchArticles();
+    async function checkAuth() {
+      try {
+        const res = await fetch(AUTH_CHECK_URL, { credentials: "include" });
+        if (!res.ok) {
+          router.replace("/login"); // Redireciona se não autenticado
+        } else {
+          setLoading(false);
+          fetchArticles();
+        }
+      } catch (err) {
+        router.replace("/login");
+      }
+    }
+    checkAuth();
+    // eslint-disable-next-line
   }, []);
 
+  // Buscar artigos
   const fetchArticles = async () => {
     const res = await fetch(API_URL, { credentials: "include" });
     const data = await res.json();
@@ -32,7 +49,6 @@ export default function AdminPanel() {
         credentials: "include",
         body: JSON.stringify({ title, content, imageUrl, url }),
       });
-
       if (!res.ok) throw new Error("Erro ao criar artigo");
       setTitle("");
       setContent("");
@@ -59,12 +75,24 @@ export default function AdminPanel() {
     }
   };
 
+  if (loading)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-xl">Verificando autenticação...</span>
+      </div>
+    );
+
   return (
     <section className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-brown3 text-center">Painel Admin</h1>
+      <h1 className="text-3xl font-bold mb-8 text-brown3 text-center">
+        Painel Admin
+      </h1>
 
       {/* Formulário */}
-      <form onSubmit={handleCreate} className="mb-12 bg-white shadow-lg p-6 rounded-lg">
+      <form
+        onSubmit={handleCreate}
+        className="mb-12 bg-white shadow-lg p-6 rounded-lg"
+      >
         <h2 className="text-xl font-semibold mb-4">Adicionar Artigo</h2>
         <input
           type="text"
