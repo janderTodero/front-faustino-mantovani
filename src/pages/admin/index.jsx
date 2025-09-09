@@ -19,7 +19,7 @@ export default function AdminPanel() {
       try {
         const res = await fetch(AUTH_CHECK_URL, { credentials: "include" });
         if (!res.ok) {
-          router.replace("/login"); // Redireciona se não autenticado
+          router.replace("/admin/login"); // Redireciona se não autenticado
         } else {
           setLoading(false);
           fetchArticles();
