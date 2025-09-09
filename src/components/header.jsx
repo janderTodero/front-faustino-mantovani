@@ -10,7 +10,7 @@ export default function Header() {
     <header className="bg-white shadow-md sticky top-0 z-40">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
         <div className="logo">
-          <a href="#home">
+          <a href="/#home">
             <img src="/logo5.png" alt="Logo do escritório" className="h-12" />
           </a>
         </div>
