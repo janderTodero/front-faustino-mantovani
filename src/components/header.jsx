@@ -57,32 +57,39 @@ export default function Header() {
         </button>
 
         <a
-          href="#home"
+          href="/#home"
           className="hover:text-brown2 transition"
           onClick={toggleMenu}
         >
           Início
         </a>
         <a
-          href="#atuacao"
+          href="/#atuacao"
           className="hover:text-brown2 transition"
           onClick={toggleMenu}
         >
           Áreas de Atuação
         </a>
         <a
-          href="#sobre"
+          href="/#sobre"
           className="hover:text-brown2 transition"
           onClick={toggleMenu}
         >
           Sobre
         </a>
         <a
-          href="#contato"
+          href="/#contato"
           className="hover:text-brown2 transition"
           onClick={toggleMenu}
         >
           Contato
+        </a>
+        <a
+          href="/artigos"
+          className="hover:text-brown2 transition"
+          onClick={toggleMenu}
+        >
+          Artigos
         </a>
       </nav>
     </header>
