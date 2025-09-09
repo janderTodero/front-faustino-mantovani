@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const API_URL = "https://faustinomantovani-api.onrender.com/api/articles";
 
@@ -13,6 +14,16 @@ export default function ArticlePage({ article, prevArticle, nextArticle }) {
 
   return (
     <div>
+        <Head>
+        <title>{article.title} | Faustino & Mantovani</title>
+        <meta name="description" content={article.content?.substring(0, 160).replace(/<[^>]+>/g, '')} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.content?.substring(0, 160).replace(/<[^>]+>/g, '')} />
+        {article.imageUrl && <meta property="og:image" content={article.imageUrl} />}
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://faustino-mantovani.vercel.app/artigos/${article.url}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <Header />
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6">
