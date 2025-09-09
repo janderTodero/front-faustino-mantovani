@@ -44,7 +44,7 @@ export default function ArticlePage({ article, prevArticle, nextArticle }) {
             )}
             {nextArticle ? (
               <Link
-                href={`/${nextArticle.url}`}
+                href={`/articles/${nextArticle.url}`}
                 className="w-full md:w-auto rounded-md px-5 py-3 text-base font-semibold border border-brown3 text-brown3 hover:bg-brown3 hover:text-white transition-all text-center"
               >
                 Próximo Artigo →<br />
