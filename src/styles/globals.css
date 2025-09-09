@@ -16,4 +16,5 @@
 /* ✅ Depois os estilos globais */
 html {
   font-family: var(--font-sans);
+  scroll-behavior: smooth;
 }

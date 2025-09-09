@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import HomeSection from "@/components/HomeSection";
 import Instagram from "@/components/Instagram";
 import Sobre from "@/components/Sobre";
+import WhatsappFloatingButton from "@/components/WhatsappButton";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Contato />
       <Instagram />
       <Footer />
+      <WhatsappFloatingButton />
     </div>
   );
 }

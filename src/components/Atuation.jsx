@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faScaleBalanced,
@@ -10,6 +9,7 @@ import {
   faCartShopping,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Atuacao() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -57,72 +57,96 @@ export default function Atuacao() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.2 } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const dropdownVariants = {
+    hidden: { height: 0, opacity: 0 },
+    show: { height: "auto", opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
     <section id="atuacao" className="py-16 bg-white">
       <div className="max-w-5xl mx-auto px-6">
-        <h1 className="text-3xl font-bold text-center mb-10 text-brown3">
+        <motion.h1
+          className="text-3xl font-bold text-center mb-10 text-brown3"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
           Áreas de Atuação
-        </h1>
-        <div className="space-y-4">
+        </motion.h1>
+
+        <motion.div
+          className="space-y-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {areas.map((area, index) => (
-            <div
+            <motion.div
               key={index}
-              className="border border-brown2 rounded-lg overflow-hidden cursor-pointer" // cursor-pointer aqui
+              className="border border-brown2 rounded-lg overflow-hidden cursor-pointer"
+              variants={cardVariants}
             >
               <button
                 onClick={() => toggleDropdown(index)}
-                className="w-full flex items-center justify-between px-4 py-3 text-lg font-semibold bg-brown2 hover:bg-brown1 text-black transition cursor-pointer" // cursor-pointer aqui
+                className="w-full flex items-center justify-between px-4 py-3 text-lg font-semibold bg-brown2 hover:bg-brown1 text-black transition cursor-pointer"
                 type="button"
               >
-                <span className="flex items-center cursor-pointer"> {/* cursor-pointer aqui */}
-                  <FontAwesomeIcon
-                    icon={area.icon}
-                    className="mr-2 text-black cursor-pointer" // cursor-pointer aqui
-                  />
+                <span className="flex items-center cursor-pointer">
+                  <FontAwesomeIcon icon={area.icon} className="mr-2 text-black cursor-pointer" />
                   {area.title}
                 </span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`transition-transform duration-300 ${
+                  className={`transition-transform duration-300 cursor-pointer ${
                     openIndex === index ? "rotate-180" : ""
-                  } cursor-pointer`} // cursor-pointer aqui
+                  }`}
                 />
               </button>
-              <DropdownContent open={openIndex === index}>
-                {area.description}
-              </DropdownContent>
-            </div>
-          ))}
-        </div>
 
-        <div className="text-center mt-8">
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    variants={dropdownVariants}
+                    initial="hidden"
+                    animate="show"
+                    exit="hidden"
+                    className="px-4 bg-beige text-brown1 overflow-hidden cursor-pointer"
+                  >
+                    <div className="py-4">{area.description}</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="text-center mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
           <a
             href="https://wa.me/17996205009"
-            className="inline-block bg-brown3 text-beige px-6 py-3 rounded-lg shadow hover:bg-brown1 hover:text-white transition cursor-pointer" // cursor-pointer aqui
+            className="inline-block bg-brown3 text-beige px-6 py-3 rounded-lg shadow hover:bg-brown1 hover:text-white transition cursor-pointer"
           >
             Contate-nos
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
-  );
-}
-
-// Componente separado para animar suavemente a expansão/retração
-function DropdownContent({ open, children }) {
-  const ref = useRef(null);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        maxHeight: open ? ref.current?.scrollHeight + "px" : "0px",
-        overflow: "hidden",
-        transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-      }}
-      className="px-4 bg-beige text-brown1"
-    >
-      <div className="py-4">{children}</div>
-    </div>
   );
 }

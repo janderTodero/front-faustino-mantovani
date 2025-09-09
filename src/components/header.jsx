@@ -16,10 +16,21 @@ export default function Header() {
         </div>
 
         <nav className="hidden md:flex space-x-6 text-black font-semibold">
-          <a href="#home" className="hover:text-brown2 transition">Início</a>
-          <a href="#atuacao" className="hover:text-brown2 transition">Áreas de Atuação</a>
-          <a href="#sobre" className="hover:text-brown2 transition">Sobre</a>
-          <a href="#contato" className="hover:text-brown2 transition">Contato</a>
+          <a href="/#home" className="hover:text-brown2 transition">
+            Início
+          </a>
+          <a href="/#atuacao" className="hover:text-brown2 transition">
+            Áreas de Atuação
+          </a>
+          <a href="/#sobre" className="hover:text-brown2 transition">
+            Sobre
+          </a>
+          <a href="/#contato" className="hover:text-brown2 transition">
+            Contato
+          </a>
+          <a href="/artigos" className="hover:text-brown2 transition">
+            Artigos
+          </a>
         </nav>
 
         <button
@@ -45,10 +56,34 @@ export default function Header() {
           <FaTimes />
         </button>
 
-        <a href="#home" className="hover:text-brown2 transition" onClick={toggleMenu}>Início</a>
-        <a href="#atuacao" className="hover:text-brown2 transition" onClick={toggleMenu}>Áreas de Atuação</a>
-        <a href="#sobre" className="hover:text-brown2 transition" onClick={toggleMenu}>Sobre</a>
-        <a href="#contato" className="hover:text-brown2 transition" onClick={toggleMenu}>Contato</a>
+        <a
+          href="#home"
+          className="hover:text-brown2 transition"
+          onClick={toggleMenu}
+        >
+          Início
+        </a>
+        <a
+          href="#atuacao"
+          className="hover:text-brown2 transition"
+          onClick={toggleMenu}
+        >
+          Áreas de Atuação
+        </a>
+        <a
+          href="#sobre"
+          className="hover:text-brown2 transition"
+          onClick={toggleMenu}
+        >
+          Sobre
+        </a>
+        <a
+          href="#contato"
+          className="hover:text-brown2 transition"
+          onClick={toggleMenu}
+        >
+          Contato
+        </a>
       </nav>
     </header>
   );
