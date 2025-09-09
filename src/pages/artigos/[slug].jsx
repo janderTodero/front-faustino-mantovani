@@ -33,7 +33,7 @@ export default function ArticlePage({ article, prevArticle, nextArticle }) {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-12 pt-8 border-t border-gray-200">
             {prevArticle ? (
               <Link
-                href={`/${prevArticle.url}`}
+                href={`/artigos/${prevArticle.url}`}
                 className="w-full md:w-auto rounded-md px-5 py-3 text-base font-semibold border border-brown3 text-brown3 hover:bg-brown3 hover:text-white transition-all text-center"
               >
                 ← Artigo Anterior<br />
@@ -44,7 +44,7 @@ export default function ArticlePage({ article, prevArticle, nextArticle }) {
             )}
             {nextArticle ? (
               <Link
-                href={`/articles/${nextArticle.url}`}
+                href={`/artigos/${nextArticle.url}`}
                 className="w-full md:w-auto rounded-md px-5 py-3 text-base font-semibold border border-brown3 text-brown3 hover:bg-brown3 hover:text-white transition-all text-center"
               >
                 Próximo Artigo →<br />
