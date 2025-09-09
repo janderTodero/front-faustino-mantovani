@@ -1,5 +1,6 @@
 import Atuacao from "@/components/Atuation";
 import Contato from "@/components/Contato";
+import Footer from "@/components/Footer";
 import Header from "@/components/header";
 import HomeSection from "@/components/HomeSection";
 import Instagram from "@/components/Instagram";
@@ -14,6 +15,7 @@ export default function Home() {
       <Sobre />
       <Contato />
       <Instagram />
+      <Footer />
     </div>
   );
 }
