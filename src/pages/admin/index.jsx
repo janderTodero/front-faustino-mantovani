@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 const API_URL = "https://faustinomantovani-api.onrender.com/api/articles";
 const AUTH_CHECK_URL = "https://faustinomantovani-api.onrender.com/api/auth/check";
+const LOGOUT_URL = "https://faustinomantovani-api.onrender.com/api/auth/logout";
 
 export default function AdminPanel() {
   const [articles, setArticles] = useState([]);
@@ -109,6 +110,19 @@ export default function AdminPanel() {
     setUrl("");
   };
 
+  // Logout
+  const handleLogout = async () => {
+    try {
+      await fetch(LOGOUT_URL, { method: "POST", credentials: "include" });
+    } catch {}
+    router.replace("/admin/login");
+  };
+
+  // Voltar ao site
+  const handleGoToSite = () => {
+    router.push("/"); // ou a rota pública desejada
+  };
+
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -118,9 +132,25 @@ export default function AdminPanel() {
 
   return (
     <section className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-brown3 text-center">
-        Painel Admin
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold text-brown3 text-center">
+          Painel Admin
+        </h1>
+        <div className="flex gap-2">
+          <button
+            onClick={handleGoToSite}
+            className="bg-gray-200 text-brown3 px-4 py-2 rounded-lg hover:bg-gray-300"
+          >
+            Voltar ao site
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
 
       {/* Formulário */}
       <form
