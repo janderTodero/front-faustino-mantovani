@@ -33,11 +33,6 @@ front-faustino-mantovani/
 ├── package.json
 └── README.md
 ```
-
-## Observações
-
-Este projeto foi desenvolvido sob demanda para o cliente Faustino e Mantovani. Caso precise de informações para manutenção ou implantação, entre em contato com o responsável pelo desenvolvimento.
-
 ---
 
 Desenvolvido por [janderTodero](https://github.com/janderTodero)
